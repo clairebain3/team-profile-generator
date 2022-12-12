@@ -1,6 +1,17 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
+function Employee(position, name, email,id, office){
+    this.position = position;
+    this.name = name;
+    this.email = email;
+    this.id = id;
+    this.office = office;
+    // this.createCard = () =>
+    // fs.writeFile('index.html', generateHTML(Employee))
+
+}
+
 function init() {
 inquirer
 .prompt([
@@ -29,8 +40,10 @@ inquirer
 ])
 
 .then((answers)=> {
-
-    addMore(), (err) =>
+    const manager = new Employee('manager', answers.mName, answers.mEmail, answers.mEmployeeId, answers.mOfficeNumber)
+    fs.writeFile('index.html', generateHTML(manager)),    (err) =>
+    // addMore(), 
+    // (err) =>
     err ? console.error(err) : console.log('Commit logged!')
   
 }
@@ -66,7 +79,8 @@ function addMore() {
                 addEmployee('intern');
             break;
             case answers.continue = 'Finished building team':
-                generateHTML();
+                // generateHTML();
+
             break;
             default: console.log('answers.continue')
         }
@@ -112,8 +126,13 @@ function addEmployee(type){
     
 }
 
-function generateHTML() {
-    console.log ('done');
+function generateHTML(data) {
+    `${data.name}
+    ${data.position}
+    ID: ${data.id}
+    Office Number: ${data.office}
+
+    `;
 }
 
 init();
