@@ -1,38 +1,29 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-function Employee(position, name, email,id, office){
-    this.position = position;
-    this.name = name;
-    this.email = email;
-    this.id = id;
-    this.office = office;
-    // this.createCard = () =>
-    // fs.writeFile('index.html', generateHTML(Employee))
 
-}
 
 function init() {
 inquirer
 .prompt([
     {
      type: 'input',
-     name: 'mName',
+     name: 'Name',
      message: 'Please enter the manager name'
     },
     {
     type: 'input',
-    name: 'mEmail',
+    name: 'Email',
     message: 'Please enter the manager email'
     },
     {
     type: 'input',
-    name: 'mEmployeeId',
+    name: 'id',
     message: 'Please enter the manager employee ID'
     },
     {
     type: 'input',
-    name: 'mOfficeNumber',
+    name: 'office',
     message: 'Please enter the manager office number'
     },
 
@@ -40,7 +31,7 @@ inquirer
 ])
 
 .then((answers)=> {
-    const manager = new Employee('manager', answers.mName, answers.mEmail, answers.mEmployeeId, answers.mOfficeNumber)
+    const manager = new Manager(answers.Name, answers,Email, answers.id, answers.office)
     fs.writeFile('index.html', generateHTML(manager)),    (err) =>
     // addMore(), 
     // (err) =>
