@@ -36,9 +36,10 @@ inquirer
 ])
 
 .then((answers)=> {
-    fs.writeFile('./dist/index.html', generateHTML(answers), (err) =>
-    err ? console.error(err) : console.log('Commit logged!')
-  );
+    newManager(answers)
+//     fs.writeFile('./dist/index.html', generateHTML(answers), (err) =>
+//     err ? console.error(err) : console.log('Commit logged!')
+//   );
   addMore();
 }
 )
@@ -99,7 +100,7 @@ function addEngineer(){
             },
             {
             type: 'input',
-            name: 'EmployeeId',
+            name: 'id',
             message: `Please enter the engineer employee ID`
             },
             {
@@ -110,10 +111,11 @@ function addEngineer(){
         ])
         
         .then((answers)=> {
+            newEngineer(answers)
 
-            fs.writeFile('./dist/employees.html', generateHTML(answers), (err) =>
-            err ? console.error(err) : console.log('Commit logged!')
-          );
+        //     fs.writeFile('./dist/employees.html', generateHTML(answers), (err) =>
+        //     err ? console.error(err) : console.log('Commit logged!')
+        //   );
 
             
             addMore();
@@ -139,21 +141,22 @@ function addIntern(){
         },
         {
         type: 'input',
-        name: 'EmployeeId',
+        name: 'id',
         message: `Please enter the engineer employee ID`
         },
         {
         type: 'input',
-        name: 'School',
+        name: 'school',
         message: `Please enter the intern school`
         }
     ])
     
     .then((answers)=> {
 
-        fs.writeFile('./dist/employees.html', generateHTML(answers), (err) =>
-        err ? console.error(err) : console.log('Commit logged!')
-      );
+    //     fs.writeFile('./dist/employees.html', generateHTML(answers), (err) =>
+    //     err ? console.error(err) : console.log('Commit logged!')
+    //   );
+    newIntern(answers)
 
         
         addMore();
@@ -165,5 +168,30 @@ function addIntern(){
 
 }
 
+function newEngineer (data) {
+    createEng = new Engineer(data.github, data.Name, data.Email, data.id)
+    console.log(createEng)
+    fs.writeFile('./dist/employees.html', generateHTML(createEng), (err) =>
+            err ? console.error(err) : console.log('Commit logged!')
+          );
+}
 
+function newManager (data) {
+    console.log(data.Name)
+    createManager = new Manager(data.office, data.Name, data.Email, data.id)
+    console.log(createManager)
+    fs.writeFile('./dist/employees.html', generateHTML(createManager), (err) =>
+            err ? console.error(err) : console.log('Commit logged!')
+          );
+}
+
+
+function newIntern (data) {
+    console.log(data.Name)
+    createInt = new Intern(data.school, data.Name, data.Email, data.id)
+    console.log(createInt)
+    fs.writeFile('./dist/employees.html', generateHTML(createInt), (err) =>
+            err ? console.error(err) : console.log('Commit logged!')
+          );
+}
 init();
