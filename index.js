@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const Employee = require('./lib/employee.js');
-
+const generateHTML = require('./utils/generateHTML');
 const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
@@ -36,12 +36,10 @@ inquirer
 ])
 
 .then((answers)=> {
-    const manager = new Manager(answers.Name, answers.Email, answers.id, answers.office)
-    fs.writeFile('index.html', generateHTML(manager)),    (err) =>
-    // addMore(), 
-    // (err) =>
+    fs.writeFile('./dist/index.html', generateHTML(answers), (err) =>
     err ? console.error(err) : console.log('Commit logged!')
-  
+  );
+  addMore();
 }
 )
 }
@@ -106,11 +104,6 @@ function addEngineer(){
             },
             {
             type: 'input',
-            name: 'OfficeNumber',
-            message: `Please enter the engineer office number`
-            },
-            {
-            type: 'input',
             name: 'github',
             message: `Please enter the engineer github name`
             }
@@ -118,27 +111,59 @@ function addEngineer(){
         
         .then((answers)=> {
 
-            switch(answers.type){
-                case answers.type = 'engineer':
-                    const eng = new Engineer((answers.Name, answers,Email, answers.id, answers.office, answers.github))
+            fs.writeFile('./dist/employees.html', generateHTML(answers), (err) =>
+            err ? console.error(err) : console.log('Commit logged!')
+          );
 
-            }
+            
             addMore();
 
-            (err) =>
-        err ? console.error(err) : console.log('Commit logged!')
+        //     (err) =>
+        // err ? console.error(err) : console.log('Commit logged!')
         }
         )
     
 }
+function addIntern(){
+    inquirer
+    .prompt([
+        {
+         type: 'input',
+         name: 'Name',
+         message: `Please enter the intern name`
+        },
+        {
+        type: 'input',
+        name: 'Email',
+        message: `Please enter the intern email`
+        },
+        {
+        type: 'input',
+        name: 'EmployeeId',
+        message: `Please enter the engineer employee ID`
+        },
+        {
+        type: 'input',
+        name: 'School',
+        message: `Please enter the intern school`
+        }
+    ])
+    
+    .then((answers)=> {
 
-function generateHTML(data) {
-    `${data.name}
-    ${data.position}
-    ID: ${data.id}
-    Office Number: ${data.office}
+        fs.writeFile('./dist/employees.html', generateHTML(answers), (err) =>
+        err ? console.error(err) : console.log('Commit logged!')
+      );
 
-    `;
+        
+        addMore();
+
+    //     (err) =>
+    // err ? console.error(err) : console.log('Commit logged!')
+    }
+    )
+
 }
+
 
 init();
