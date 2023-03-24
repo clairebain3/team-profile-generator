@@ -6,17 +6,17 @@ describe("Employee", () => {
       const Tiger =  new Employee("Manager", "Tiger", "Tiger@gmail.com", 1234)
         // const result = getName(Tiger)
 
-      expect(Tiger.getName).toEqual("Tiger");
+      expect(Tiger.name).toEqual("Tiger");
     });
     it("should return the correct email", () => {
         const Tiger =  new Employee("Manager", "Tiger", "Tiger@gmail.com", 1234)
-          const result = getEmail(Tiger)
+          const result = Tiger.email
   
         expect(result).toEqual("Tiger@gmail.com");
       });
       it("should return the correct id", () => {
         const Tiger =  new Employee("Manager", "Tiger", "Tiger@gmail.com", 1234)
-          const result = getId(Tiger)
+          const result = Tiger.id
   
         expect(result).toEqual(1234);
       });
